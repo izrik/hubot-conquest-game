@@ -14,9 +14,15 @@
 # Author:
 #   izrik
 
-module.exports = (robot) ->
-  robot.respond /hello/, (res) ->
-    res.reply "hello!"
 
-  robot.hear /orly/, (res) ->
-    res.send "yarly"
+start_state = (robot) ->
+  #TODO: change 'hear' to 'respond'
+  robot.hear /create\s*(a\s+)?(new\s+)?game(\s+with\s+(.*))?/, (res) ->
+    res.send "Got create command"
+
+current_state = null
+
+module.exports = (robot) ->
+  state = current_state ? start_state
+  next = state(robot)
+  current_state = next ? state
