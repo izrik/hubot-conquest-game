@@ -20,6 +20,13 @@ start_state = (robot) ->
   robot.hear /create\s*(a\s+)?(new\s+)?game(\s+with\s+(.*))?/, (res) ->
     res.send "Got create command"
 
+  robot.hear /a(b)c/, (res) ->
+    xyz = /x(y)z/.match()
+    message = "unknown"
+    if s = xyz "xyz"
+      message = (typeof s).toString() + ": " + s.toString()
+    res.send message
+
 current_state = null
 
 module.exports = (robot) ->
